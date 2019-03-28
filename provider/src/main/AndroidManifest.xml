@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.lesson11contentprovider">
+
+    <application
+        android:name="com.example.lesson11contentprovider.AppNotes"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/Provider"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+
+        tools:ignore="GoogleAppIndexingWarning">
+
+        <provider
+            android:authorities="com.example.lesson11contentprovider.Note"
+            android:name=".databaseManagement.NoteProvider"
+            android:exported="true">
+        </provider>
+
+        <activity
+            android:name="com.example.lesson11contentprovider.activities.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.lesson11contentprovider.activities.CreateEditNote"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName="com.example.lesson11contentprovider.activities.MainActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.example.lesson11contentprovider.activities.ViewNote"
+            android:parentActivityName="com.example.lesson11contentprovider.activities.MainActivity" />
+        <activity
+            android:name="com.example.lesson11contentprovider.activities.SettingActivity"
+            android:parentActivityName="com.example.lesson11contentprovider.activities.MainActivity"/>
+
+    </application>
+
+</manifest>

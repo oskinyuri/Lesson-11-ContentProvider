@@ -1,9 +1,11 @@
 package com.example.lesson11contentprovider.databaseManagement;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.AsyncTask;
 
-import com.example.lesson11contentprovider.AppNotes;
 import com.example.lesson11contentprovider.model.Note;
 import com.example.lesson11contentprovider.noteCallbacks.DeletedNoteCallback;
 import com.example.lesson11contentprovider.noteCallbacks.GotNoteCallback;
@@ -11,9 +13,19 @@ import com.example.lesson11contentprovider.noteCallbacks.GotNotesCallback;
 import com.example.lesson11contentprovider.noteCallbacks.LoadedNoteCallback;
 import com.example.lesson11contentprovider.noteCallbacks.NoteCallback;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LoadDataAsyncTask extends AsyncTask<Void, Void, Void> {
+
+    private static final String AUTHORITY = "com.example.lesson11contentprovider.Note";
+    private static final String NOTE_PATH = "notes";
+    private static final Uri NOTE_CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + NOTE_PATH);
+
+    public static final String COLUMN_ID = "noteID";
+    public static final String COLUMN_NAME = "NAME";
+    public static final String COLUMN_CONTENT = "CONTENT";
+
 
     public static final int LOAD_NOTES = 1;
     public static final int ADD_NOTE = 2;
@@ -57,23 +69,40 @@ public class LoadDataAsyncTask extends AsyncTask<Void, Void, Void> {
     }
 
     private void getNotes(){
-        noteList = AppNotes.getNotes();
+
+        Cursor cursor = mContext.getContentResolver().query(NOTE_CONTENT_URI, null, null,
+                null, null);
+        assert cursor != null;
+        noteList = parseCursor(cursor);
+
+        //noteList = AppNotes.getNotes();
     }
 
     private void addNote(){
-        AppNotes.addNote(mNote);
+        ContentValues cv = ConvertNote.getContentValues(mNote);
+        Uri newUri = mContext.getContentResolver().insert(NOTE_CONTENT_URI, cv);
+
+        //AppNotes.addNote(mNote);
     }
 
     private void updateNote(){
-        AppNotes.updateNote(mNote);
+        ContentValues cv = ConvertNote.getContentValues(mNote);
+        mContext.getContentResolver().update(NOTE_CONTENT_URI, cv, COLUMN_ID + "=\"" + mNote.getId() + "\"", null);
+        //AppNotes.updateNote(mNote);
     }
 
     private void deleteNote(){
-        AppNotes.deleteNote(mNote);
+
+        mContext.getContentResolver().delete(NOTE_CONTENT_URI,  COLUMN_ID + "=\"" + mNote.getId() + "\"", null);
+        //AppNotes.deleteNote(mNote);
     }
 
-    private void getNote(){
-        mNote = AppNotes.getNote(mNote.getId());
+    private void getNote() {
+        Cursor cursor = mContext.getContentResolver().query(NOTE_CONTENT_URI, null, COLUMN_ID + "=\"" + mNote.getId() + "\"",
+                null, null);
+        assert cursor != null;
+        mNote = parseCursorForNote(cursor);
+        //mNote = AppNotes.getNote(mNote.getId());
     }
 
     @Override
@@ -95,5 +124,31 @@ public class LoadDataAsyncTask extends AsyncTask<Void, Void, Void> {
                 ((GotNoteCallback) mNoteCallback).onNoteReceived(mNote);
                 break;
         }
+    }
+
+    private Note parseCursorForNote(Cursor cursor) {
+        Note note = null;
+        if (cursor.moveToFirst()) {
+            note = new Note();
+            note.setId(cursor.getString(cursor.getColumnIndex(COLUMN_ID)));
+            note.setName(cursor.getString(cursor.getColumnIndex(COLUMN_NAME)));
+            note.setText(cursor.getString(cursor.getColumnIndex(COLUMN_CONTENT)));
+        }
+        return note;
+    }
+
+    private List<Note> parseCursor(Cursor cursor) {
+        List<Note> noteList = new ArrayList<>();
+        Note note;
+        if (cursor.moveToFirst()){
+            do{
+                note = new Note();
+                note.setId(cursor.getString(cursor.getColumnIndex(COLUMN_ID)));
+                note.setName(cursor.getString(cursor.getColumnIndex(COLUMN_NAME)));
+                note.setText(cursor.getString(cursor.getColumnIndex(COLUMN_CONTENT)));
+                noteList.add(note);
+            } while (cursor.moveToNext());
+        }
+        return noteList;
     }
 }
