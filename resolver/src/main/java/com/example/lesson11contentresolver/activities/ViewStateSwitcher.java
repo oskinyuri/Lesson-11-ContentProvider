@@ -1,4 +1,4 @@
-package com.example.lesson11contentprovider.activities;
+package com.example.lesson11contentresolver.activities;
 
 import android.view.View;
 import android.view.ViewGroup;

@@ -1,6 +1,6 @@
-package com.example.lesson11contentprovider.mainRecycler;
+package com.example.lesson11contentresolver.mainRecycler;
 
-import com.example.lesson11contentprovider.model.Note;
+import com.example.lesson11contentresolver.model.Note;
 
 import java.util.List;
 

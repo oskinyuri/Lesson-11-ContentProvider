@@ -1,4 +1,4 @@
-package com.example.lesson11contentprovider.activities;
+package com.example.lesson11contentresolver.activities;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -11,7 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.lesson11contentprovider.R;
+import com.example.lesson11contentresolver.R;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;

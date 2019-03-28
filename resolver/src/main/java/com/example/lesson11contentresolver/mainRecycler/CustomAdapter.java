@@ -1,4 +1,4 @@
-package com.example.lesson11contentprovider.mainRecycler;
+package com.example.lesson11contentresolver.mainRecycler;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,11 +7,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.lesson11contentprovider.activities.ViewNote;
-import com.example.lesson11contentprovider.databaseManagement.LoadDataAsyncTask;
-import com.example.lesson11contentprovider.model.Note;
-import com.example.lesson11contentprovider.noteCallbacks.NoteCallback;
-import com.example.lesson11contentprovider.R;
+import com.example.lesson11contentresolver.activities.ViewNote;
+import com.example.lesson11contentresolver.databaseManagement.LoadDataAsyncTask;
+import com.example.lesson11contentresolver.model.Note;
+import com.example.lesson11contentresolver.noteCallbacks.NoteCallback;
+import com.example.lesson11contentresolver.R;
 
 import java.util.ArrayList;
 import java.util.List;

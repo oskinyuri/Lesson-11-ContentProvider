@@ -1,4 +1,4 @@
-package com.example.lesson11contentprovider;
+package com.example.lesson11contentresolver;
 
 import android.app.Application;
 

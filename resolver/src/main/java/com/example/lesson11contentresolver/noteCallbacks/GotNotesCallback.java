@@ -1,6 +1,6 @@
-package com.example.lesson11contentprovider.noteCallbacks;
+package com.example.lesson11contentresolver.noteCallbacks;
 
-import com.example.lesson11contentprovider.model.Note;
+import com.example.lesson11contentresolver.model.Note;
 
 import java.util.List;
 

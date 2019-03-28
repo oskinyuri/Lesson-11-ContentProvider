@@ -1,4 +1,4 @@
-package com.example.lesson11contentprovider.activities;
+package com.example.lesson11contentresolver.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,11 +9,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.lesson11contentprovider.model.Note;
-import com.example.lesson11contentprovider.databaseManagement.LoadDataAsyncTask;
-import com.example.lesson11contentprovider.noteCallbacks.DeletedNoteCallback;
-import com.example.lesson11contentprovider.noteCallbacks.GotNoteCallback;
-import com.example.lesson11contentprovider.R;
+import com.example.lesson11contentresolver.model.Note;
+import com.example.lesson11contentresolver.databaseManagement.LoadDataAsyncTask;
+import com.example.lesson11contentresolver.noteCallbacks.DeletedNoteCallback;
+import com.example.lesson11contentresolver.noteCallbacks.GotNoteCallback;
+import com.example.lesson11contentresolver.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Objects;

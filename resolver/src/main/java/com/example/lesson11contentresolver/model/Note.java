@@ -1,4 +1,4 @@
-package com.example.lesson11contentprovider.model;
+package com.example.lesson11contentresolver.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
